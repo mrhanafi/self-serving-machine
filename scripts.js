@@ -64,12 +64,25 @@ var products = [
     },
 ];
 
-const SelfServiceMachine = {
-    data() {
+const SelfServiceMachine = {            //declarative rendering
+    data() {                            //data objects property
         return {
             products: window.products
         }
+    },
+    methods: {                          //method object
+        total: function() {
+            var total = 0;
+            this.products.forEach(function(item){
+                if (item.active){
+                    total += item.price * item.quantity;
+                }
+            });
+
+            return total.toFixed(2);
+        }
     }
+
 };
 
 Vue.createApp(SelfServiceMachine).mount('#app');
